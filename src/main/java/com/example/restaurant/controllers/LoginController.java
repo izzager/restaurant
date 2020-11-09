@@ -22,13 +22,13 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/loginuser")
-    public String loginuser(@RequestParam String username, String password) {
-        if (userService.findUserByUserLoginAndAndUserPassword(username, password)
-                        .isPresent()) {
+    @GetMapping("/loginuser")
+    public String loginuser(@RequestParam String username, @RequestParam String password) {
+//        if (userService.findUserByUserLoginAndAndUserPassword(username, password)
+//                        .isPresent()) {
             return "main";
-        } else {
-            return "wrong_login";
-        }
+//        } else {
+//            return "wrong_login";
+//        }
     }
 }

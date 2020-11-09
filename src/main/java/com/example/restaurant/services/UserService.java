@@ -14,7 +14,6 @@ public class UserService implements IUserService {
 
     public UserService() { }
 
-
     @Override
     public Optional<User> findUserByUserLoginAndAndUserPassword(String userLogin, String userPassword) {
         return userRepository.findUserByUserLoginAndAndUserPassword(userLogin, userPassword);
