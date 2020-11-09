@@ -19,16 +19,21 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login() {
-        return "login";
+        return "main";
     }
 
-    @GetMapping("/loginuser")
-    public String loginuser(@RequestParam String username, @RequestParam String password) {
-//        if (userService.findUserByUserLoginAndAndUserPassword(username, password)
-//                        .isPresent()) {
-            return "main";
-//        } else {
-//            return "wrong_login";
-//        }
+    @RequestMapping("/main")
+    public String main() {
+        return "main";
     }
+//
+//    @GetMapping("/loginuser")
+//    public String loginuser(@RequestParam String username, @RequestParam String password) {
+////        if (userService.findUserByUserLoginAndAndUserPassword(username, password)
+////                        .isPresent()) {
+//            return "main";
+////        } else {
+////            return "wrong_login";
+////        }
+//    }
 }

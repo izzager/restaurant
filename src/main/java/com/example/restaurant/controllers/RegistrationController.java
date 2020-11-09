@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RegistrationController {
 
-    @RequestMapping("/registration")
-    public String login() {
-        return "registration";
-    }
-
-    @PostMapping("/registrationuser")
-    public String successRegistration(@RequestParam String username, String password) {
-        return "success_registration";
-    }
+//    @RequestMapping("/registration")
+//    public String login() {
+//        return "registration";
+//    }
+//
+//    @PostMapping("/registrationuser")
+//    public String successRegistration(@RequestParam String username, String password) {
+//        return "success_registration";
+//    }
 }
