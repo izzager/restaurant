@@ -5,5 +5,6 @@ import com.example.restaurant.entities.User;
 import java.util.Optional;
 
 public interface IUserService {
-    Optional<User> findUserByUserLoginAndAndUserPassword(String userLogin, String userPassword);
+    User findById(Long id);
+    Optional<User> findUserByUsernameAndPassword(String username, String password);
 }

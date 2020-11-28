@@ -1,14 +1,71 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="">
 <head>
-    <title>Restaurant Proglot Monet</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Proglot Monet | Sign in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+    <style type="text/css">
+        /* DEMO ONLY */
+        .dish{margin: 10px}
+        .container .demo{text-align:center;}
+        .container .demo div{padding:15px 0;}
+        .container .demo div:nth-child(odd){color:#FFFFFF; background:#CDC1A8;}
+        .container .demo div:nth-child(even){color:#FFFFFF; background:#BBAA86;}
+        @media screen and (max-width:900px){.container .demo div{margin-bottom:0;}}
+        /* DEMO ONLY */
+    </style>
 </head>
-<body>
-<form action="/loginuser" method="get">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+<body id="top">
+
+<div class="bgded" style="background-image:url('/images/demo/backgrounds/01.jpg');">
+    <!-- ################################################################################################ -->
+    <div class="wrapper row1">
+        <header id="header" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <div id="logo" class="fl_left">
+                <h1><a href="/">Proglot Monet</a></h1>
+            </div>
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/menu">Menu</a></li>
+                    <li><a href="/login">Sign in</a></li>
+                </ul>
+            </nav>
+            <!-- ################################################################################################ -->
+        </header>
+    </div>
+
+</div>
+
+<div class="wrapper row3">
+    <main class="hoc container clear">
+        <div class="content">
+            <div>{{#error}}{{textError}}{{/error}}</div>
+            <form action="/login" method="post">
+                <div><label> Username : <input type="text" name="username"/> </label></div>
+                <div><label> Password: <input type="password" name="password"/> </label></div>
+                <div><input type="submit" value="Sign In"/></div>
+            </form>
+            <a href="/registration">Registration</a>
+        </div>
+        <div class="clear"></div>
+    </main>
+</div>
+
+<div class="wrapper row5">
+    <div id="copyright" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <p class="fl_left">Copyright &copy; 2020 - All Rights Reserved - <a href="#">Proglot Monet</a></p>
+        <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+        <!-- ################################################################################################ -->
+    </div>
+</div>
+
+<!-- JAVASCRIPTS -->
+<script src="/scripts/jquery.min.js"></script>
+<script src="/scripts/jquery.backtotop.js"></script>
+<script src="/scripts/jquery.mobilemenu.js"></script>
 </body>
 </html>

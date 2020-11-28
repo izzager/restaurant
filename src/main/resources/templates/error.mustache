@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Proglot Monet | Registration</title>
+    <title>Proglot Monet | Error</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-    <style type="text/css">
-        /* DEMO ONLY */
-        .dish{margin: 10px}
-        .container .demo{text-align:center;}
-        .container .demo div{padding:15px 0;}
-        .container .demo div:nth-child(odd){color:#FFFFFF; background:#CDC1A8;}
-        .container .demo div:nth-child(even){color:#FFFFFF; background:#BBAA86;}
-        @media screen and (max-width:900px){.container .demo div{margin-bottom:0;}}
-        /* DEMO ONLY */
-    </style>
 </head>
 <body id="top">
 
+<!-- Top Background Image Wrapper -->
 <div class="bgded" style="background-image:url('/images/demo/backgrounds/01.jpg');">
     <!-- ################################################################################################ -->
     <div class="wrapper row1">
@@ -30,28 +21,34 @@
                 <ul class="clear">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/menu">Menu</a></li>
-                    <li><a href="/login">Sign in</a></li>
+                    {{^isUserAutorize}}
+                        <li><a href="/login">Sign in</a></li>
+                    {{/isUserAutorize}}
+                    {{#isUserAutorize}}
+                        <li><a href="/makeOrder">Make order</a></li>
+                        <li><a href="/showOrders">Orders</a></li>
+                        <li><a href="/logout">Sign Out</a></li>
+                    {{/isUserAutorize}}
                 </ul>
             </nav>
             <!-- ################################################################################################ -->
         </header>
     </div>
 
+    <div class="wrapper">
+        <article id="pageintro" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <div class="transbox">
+                <h1 class="heading">Oops...</h1>
+                <p>The error {{error}} occurred.</p>
+            </div>
+            <footer><a class="btn" href="/">Back to main page</a></footer>
+            <!-- ################################################################################################ -->
+        </article>
+    </div>
+    <!-- ################################################################################################ -->
 </div>
 
-<div class="wrapper row3">
-    <main class="hoc container clear">
-        <div class="content">
-            <div>{{error}}</div>
-            <form name="userForm" action="registration" method="post">
-                <div><label> Username : <input type="text" name="username"/> </label></div>
-                <div><label> Password: <input type="password" name="password"/> </label></div>
-                <div><input type="submit" value="Register"/></div>
-            </form>
-        </div>
-        <div class="clear"></div>
-    </main>
-</div>
 
 <div class="wrapper row5">
     <div id="copyright" class="hoc clear">
@@ -61,7 +58,6 @@
         <!-- ################################################################################################ -->
     </div>
 </div>
-
 <!-- JAVASCRIPTS -->
 <script src="/scripts/jquery.min.js"></script>
 <script src="/scripts/jquery.backtotop.js"></script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Proglot Monet | Registration</title>
+    <title>Proglot Monet | Orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
@@ -30,7 +30,9 @@
                 <ul class="clear">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/menu">Menu</a></li>
-                    <li><a href="/login">Sign in</a></li>
+                    <li><a href="/makeOrder">Make order</a></li>
+                    <li><a href="/showOrders">Orders</a></li>
+                    <li><a href="/logout">Sign Out</a></li>
                 </ul>
             </nav>
             <!-- ################################################################################################ -->
@@ -42,12 +44,22 @@
 <div class="wrapper row3">
     <main class="hoc container clear">
         <div class="content">
-            <div>{{error}}</div>
-            <form name="userForm" action="registration" method="post">
-                <div><label> Username : <input type="text" name="username"/> </label></div>
-                <div><label> Password: <input type="password" name="password"/> </label></div>
-                <div><input type="submit" value="Register"/></div>
-            </form>
+            <h1>Orders</h1>
+                {{#orders}}
+                 <div class="group btmspace-50 demo">
+                    <div class="order">
+                        <h2>Order #{{id}} from {{orderDate}}</h2>
+                        {{#dishes}}
+                            <div class="dish">
+                                <h4>{{dishName}}</h4>
+                                <p>Category: {{category}}</p>
+                                <p>{{price}} rub</p>
+                            </div>
+                        {{/dishes}}
+                        <h2>Summa: {{summa}} rub</h2>
+                    </div>
+                 </div>
+                {{/orders}}
         </div>
         <div class="clear"></div>
     </main>

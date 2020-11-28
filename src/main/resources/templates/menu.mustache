@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Proglot Monet | Registration</title>
+    <title>Proglot Monet | Menu</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
@@ -30,7 +30,14 @@
                 <ul class="clear">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/menu">Menu</a></li>
-                    <li><a href="/login">Sign in</a></li>
+                    {{^isUserAutorize}}
+                        <li><a href="/login">Sign in</a></li>
+                    {{/isUserAutorize}}
+                    {{#isUserAutorize}}
+                        <li><a href="/makeOrder">Make order</a></li>
+                        <li><a href="/showOrders">Orders</a></li>
+                        <li><a href="/logout">Sign Out</a></li>
+                    {{/isUserAutorize}}
                 </ul>
             </nav>
             <!-- ################################################################################################ -->
@@ -42,12 +49,17 @@
 <div class="wrapper row3">
     <main class="hoc container clear">
         <div class="content">
-            <div>{{error}}</div>
-            <form name="userForm" action="registration" method="post">
-                <div><label> Username : <input type="text" name="username"/> </label></div>
-                <div><label> Password: <input type="password" name="password"/> </label></div>
-                <div><input type="submit" value="Register"/></div>
-            </form>
+            <h2>Menu</h2>
+            <div class="group btmspace-50 demo">
+                {{#dishes}}
+                    <div class="dish">
+                        <h2>{{dishName}}</h2>
+                        <p>Category: {{category}}</p>
+                        <p>{{price}} rub</p>
+                        <img src="/images/demo/gallery/dish.jpg">
+                    </div>
+                {{/dishes}}
+            </div>
         </div>
         <div class="clear"></div>
     </main>
