@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Proglot Monet | Error</title>
+    <title>Proglot Monet | Menu</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+    <style type="text/css">
+        /* DEMO ONLY */
+        .dish{margin: 10px}
+        .container .demo{text-align:center;}
+        .container .demo div{padding:15px 0;}
+        .container .demo div{color:#FFFFFF; background:#CDC1A8;}
+        @media screen and (max-width:900px){.container .demo div{margin-bottom:0;}}
+        /* DEMO ONLY */
+    </style>
 </head>
 <body id="top">
 
-<!-- Top Background Image Wrapper -->
 <div class="bgded" style="background-image:url('/images/demo/backgrounds/01.jpg');">
     <!-- ################################################################################################ -->
     <div class="wrapper row1">
@@ -39,20 +47,39 @@
         </header>
     </div>
 
-    <div class="wrapper">
-        <article id="pageintro" class="hoc clear">
-            <!-- ################################################################################################ -->
-            <div class="transbox">
-                <h1 class="heading">Oops...</h1>
-                <p>The error {{error}} occurred.</p>
-            </div>
-            <footer><a class="btn" href="/">Back to main page</a></footer>
-            <!-- ################################################################################################ -->
-        </article>
-    </div>
-    <!-- ################################################################################################ -->
 </div>
 
+<div class="wrapper row3">
+    <main class="hoc container clear">
+        <div class="content">
+            <h2>Your dishes</h2>
+            <div>{{#clientDishes}}
+                {{#dishes}}
+                    <div>{{dishName}}   Category: {{category}}   {{price}} rub</div>
+                {{/dishes}}
+                <h2>Summa: {{summa}} rub</h2>
+            {{/clientDishes}}</div>
+            <h2>Menu</h2>
+            <div class="group btmspace-50 demo">
+                {{#dishes}}
+                    <div class="dish">
+                        <h2>{{dishName}}</h2>
+                        <p>Category: {{category}}</p>
+                        <p>{{price}} rub</p>
+                        <img src="/images/demo/gallery/dish.jpg">
+                        <form name="dishForm" action="addDishToOrder" method="post">
+                            <input type="hidden" name="dishName" value = "{{dishName}}">
+                            <input type="hidden" name="category" value = "{{category}}">
+                            <input type="hidden" name="price" value = "{{price}}">
+                            <div><input class="btn" type="submit" value="Add this dish"/></div>
+                        </form>
+                    </div>
+                {{/dishes}}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </main>
+</div>
 
 <div class="wrapper row5">
     <div id="copyright" class="hoc clear">
@@ -62,6 +89,7 @@
         <!-- ################################################################################################ -->
     </div>
 </div>
+
 <!-- JAVASCRIPTS -->
 <script src="/scripts/jquery.min.js"></script>
 <script src="/scripts/jquery.backtotop.js"></script>

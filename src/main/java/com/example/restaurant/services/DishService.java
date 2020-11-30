@@ -25,4 +25,8 @@ public class DishService implements IDishService {
         return dishRepository.findById(id);
     }
 
+    public Optional<Dish> findFirstByDishName(String dishName) {
+        return dishRepository.findFirstByDishName(dishName);
+    }
+
 }

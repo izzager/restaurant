@@ -1,9 +1,11 @@
 package com.example.restaurant.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "Dishes")
 public class Dish {
@@ -29,49 +31,4 @@ public class Dish {
         this.inMenu = inMenu;
     }
 
-    public Integer getId() { return id; }
-
-    public String getDishName() { return dishName; }
-
-    public int getPrice() { return price; }
-
-    public String getCategory() { return category; }
-
-    public boolean isInMenu() { return inMenu; }
-
-    public void setDishName(String dishName) { this.dishName = dishName; }
-
-    public void setCategory(String category) { this.category = category; }
-
-    public void setPrice(int price) { this.price = price; }
-
-    public void setInMenu(boolean inMenu) { this.inMenu = inMenu; }
-
-    @Override
-    public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", dishName='" + dishName + '\'' +
-                ", category='" + category + '\'' +
-                ", price=" + price +
-                ", inMenu=" + inMenu +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dish dish = (Dish) o;
-        return price == dish.price &&
-                inMenu == dish.inMenu &&
-                Objects.equals(id, dish.id) &&
-                Objects.equals(dishName, dish.dishName) &&
-                Objects.equals(category, dish.category);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, dishName, category, price, inMenu);
-    }
 }

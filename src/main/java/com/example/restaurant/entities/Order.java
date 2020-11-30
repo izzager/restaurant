@@ -1,12 +1,20 @@
 package com.example.restaurant.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "UserOrders")
+@NamedStoredProcedureQuery(name = "Order.addDishToOrder",
+        procedureName = "sp_addDishToOrderJ", parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "order_id", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "dishes_id", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "res", type = Boolean.class)})
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,49 +28,10 @@ public class Order {
     @Transient
     private double summa;
 
-    public Long getId() { return id; }
+    public Order() {}
 
-    public void setId(Long id) { this.id = id; }
-
-    public Long getIdUser() { return idUser; }
-
-    public void setIdUser(Long idUser) { this.idUser = idUser; }
-
-    public Set<Dish> getDishes() { return dishes; }
-
-    public void setDishes(Set<Dish> dishes) { this.dishes = dishes; }
-
-    public Date getOrderDate() { return orderDate; }
-
-    public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
-
-    public double getSumma() { return summa; }
-
-    public void setSumma(double summa) { this.summa = summa; }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", idUser=" + idUser +
-                ", orderDate=" + orderDate +
-                ", dishes=" + dishes +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) &&
-                Objects.equals(idUser, order.idUser) &&
-                Objects.equals(orderDate, order.orderDate) &&
-                Objects.equals(dishes, order.dishes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, idUser, orderDate, dishes);
+    public Order(Long idUser, Date orderDate) {
+        this.idUser = idUser;
+        this.orderDate = orderDate;
     }
 }
