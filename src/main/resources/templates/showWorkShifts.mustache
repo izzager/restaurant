@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Proglot Monet | Edit staff</title>
+    <title>Proglot Monet | Work Shifts</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
@@ -48,23 +48,38 @@
             <a href="/admin/addStaffToList">Add a new person to staff | </a>
             <a href="/admin/showWorkShifts">Show work shifts</a>
             <br>
-            <h2>Edit staff</h2>
+            <h2>Work shifts</h2>
             <div class="group btmspace-50 demo">
-                {{#staff}}
-                    <div class="dish" style="padding-left: 20px">
-                        <form name="staffForm" action="/admin/editStaffInList" method="post">
-                            <input type="hidden" name="id" value = "{{id}}">
-                            <label>Last name: <input type="text" name="F" value = "{{F}}" style="color:black;"></label>
-                            <label>First name: <input type="text" name="I" value = "{{I}}" style="color:black"></label>
-                            <label>Father name: <input type="text" name="O" value = "{{O}}" style="color:black"></label>
-                            <label>Position: <input type="text" name="position" value = "{{position}}" style="color:black"></label>
-                            <label>Passport: <input type="number" name="passport" value = "{{passport}}" style="color:black"></label>
-                            <label>Salary Per Hour: <input type="number" name="salaryPerHour" value = "{{salaryPerHour}}" style="color:black"></label>
-                            <label>Work now: <input type="checkbox" name="statusStaff" {{checked}} ></label>
-                            <div><input class="btn" type="submit" value="Change this person"/></div>
-                        </form>
-                    </div>
-                {{/staff}}
+                <div style="margin: 20px; background: white; color: black;">
+                {{#shift}}
+                <form name="dateShiftForm" action="/admin/showShiftsByDate" method="post">
+                    <label>Choose shifts between <input type="datetime-local" name="date1" value={{date1}}></label>
+                    <label>and <input type="datetime-local" name="date2" value={{date2}}></label>
+                    <input class="btn" type="submit" value="Get shifts" style="margin: 10px;" />
+                </form>
+                {{/shift}}</div>
+                <table>
+                    <tr>
+                        <th>Time start</th>
+                        <th>Time end</th>
+                        <th>Last name</th>
+                        <th>First name</th>
+                        <th>Father name</th>
+                        <th>Position</th>
+                    </tr>
+                    {{#shifts}}
+                        <tr>
+                            <td>{{timeStart}}</td>
+                            <td>{{timeEnd}}</td>
+                            {{#staff}}
+                                <td>{{F}}</td>
+                                <td>{{I}}</td>
+                                <td>{{O}}</td>
+                                <td>{{position}}</td>
+                            {{/staff}}
+                        </tr>
+                    {{/shifts}}
+                </table>
             </div>
         </div>
         <div class="clear"></div>

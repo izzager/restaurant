@@ -1,9 +1,12 @@
 package com.example.restaurant.controllers;
 
+import com.example.restaurant.entities.DateString;
 import com.example.restaurant.entities.Dish;
 import com.example.restaurant.entities.Staff;
+import com.example.restaurant.entities.WorkShift;
 import com.example.restaurant.services.DishService;
 import com.example.restaurant.services.StaffService;
+import com.example.restaurant.services.WorkShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,11 +25,13 @@ public class AdminController {
 
     DishService dishService;
     StaffService staffService;
+    WorkShiftService workShiftService;
 
     @Autowired
-    public AdminController(DishService dishService, StaffService staffService) {
+    public AdminController(DishService dishService, StaffService staffService, WorkShiftService workShiftService) {
         this.dishService = dishService;
         this.staffService = staffService;
+        this.workShiftService = workShiftService;
     }
 
     @RequestMapping("/")
@@ -130,5 +136,29 @@ public class AdminController {
         System.out.println(staff);
         model.addAttribute("staff", staff);
         return "editStaff";
+    }
+
+    @GetMapping("/showWorkShifts")
+    public String showWorkShifts(Model model) {
+        List<WorkShift> shifts = workShiftService.findAll().stream().skip(51000).collect(Collectors.toList());
+        return getShifts(model, shifts);
+    }
+
+    private String getShifts(Model model, List<WorkShift> shifts) {
+        for (WorkShift shift : shifts) {
+            if (shift.getTimeEnd() == null) {
+                shift.setTimeEnd(LocalDateTime.now());
+            }
+        }
+        model.addAttribute("shifts", shifts);
+        model.addAttribute("dateShiftForm", new DateString());
+        model.addAttribute("shift", new DateString());
+        return "showWorkShifts";
+    }
+
+    @PostMapping("/showShiftsByDate")
+    public String showShiftsByDate(@ModelAttribute DateString dateShiftForm, Model model) {
+        List<WorkShift> shifts = workShiftService.findByDate(dateShiftForm.toDate1(), dateShiftForm.toDate2());
+        return getShifts(model, shifts);
     }
 }
