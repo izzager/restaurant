@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "Dishes")
 public class Dish {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String dishName;
@@ -22,6 +22,9 @@ public class Dish {
     @ManyToMany(mappedBy = "dishes")
     private Set<Order> orders;
 
+    @Transient
+    private String checked = "checked";
+
     public Dish() {}
 
     public Dish(String dishName, String category, int price, boolean inMenu) {
@@ -29,6 +32,7 @@ public class Dish {
         this.category = category;
         this.price = price;
         this.inMenu = inMenu;
+        checked = inMenu ? "checked" : "unchecked";
     }
 
 }

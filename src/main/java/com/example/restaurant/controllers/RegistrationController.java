@@ -25,7 +25,7 @@ public class RegistrationController {
     public String addUser(@ModelAttribute("userForm") User userForm, Model model) {
         System.out.println(userForm.toString());
         if (!userService.saveUser(userForm)){
-            model.addAttribute("error", "The user with this name already exists");
+            model.addAttribute("error", true);
             return "registration";
         }
         return "main";

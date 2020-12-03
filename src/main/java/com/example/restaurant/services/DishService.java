@@ -5,6 +5,8 @@ import com.example.restaurant.repositories.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,10 @@ public class DishService implements IDishService {
 
     public Optional<Dish> findFirstByDishName(String dishName) {
         return dishRepository.findFirstByDishName(dishName);
+    }
+
+    public <S extends Dish> S save(S s) {
+        return dishRepository.save(s);
     }
 
 }

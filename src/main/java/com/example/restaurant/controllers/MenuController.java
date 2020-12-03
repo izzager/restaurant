@@ -3,8 +3,6 @@ package com.example.restaurant.controllers;
 import com.example.restaurant.entities.Dish;
 import com.example.restaurant.services.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +26,10 @@ public class MenuController {
                 .filter(Dish::isInMenu)
                 .limit(10)
                 .collect(Collectors.toList());
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.getName().equals("anonymousUser")) {
-            model.addAttribute("isUserAutorize", true);
-        }
         model.addAttribute("dishes", dishesInMenu);
+        GreetingController.checkAuth(model);
+        GreetingController.checkAdmin(model);
         return "menu";
     }
-
 
 }

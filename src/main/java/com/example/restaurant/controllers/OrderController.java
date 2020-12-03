@@ -41,18 +41,16 @@ public class OrderController {
     public String showOrders(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> currUser = userService.findUserByUsername(auth.getName());
-        if (currUser.isPresent()) {
-            List<Order> orders = orderService.findAllByIdUser(currUser.get().getId());
-            for (Order order : orders) {
-                order.setSumma(order.getDishes().stream()
-                                    .map(Dish::getPrice)
-                                    .reduce(0, Integer::sum));
-            }
-            model.addAttribute("orders",
-                    orderService.findAllByIdUser(currUser.get().getId()));
-        } else {
-            return "error";
+        GreetingController.checkAdmin(model);
+
+        List<Order> orders = orderService.findAllByIdUser(currUser.get().getId());
+        for (Order order : orders) {
+            order.setSumma(order.getDishes().stream()
+                    .map(Dish::getPrice)
+                    .reduce(0, Integer::sum));
         }
+        model.addAttribute("orders",
+                orderService.findAllByIdUser(currUser.get().getId()));
 
         return "showOrders";
     }
@@ -60,9 +58,7 @@ public class OrderController {
     @GetMapping("/makeOrder")
     public String makeOrderPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.getName().equals("anonymousUser")) {
-            model.addAttribute("isUserAutorize", true);
-        }
+        GreetingController.checkAdmin(model);
 
         User user = userService.findUserByUsername(auth.getName()).get();
         orderService.save(new Order(user.getId(), new Date(Calendar.getInstance().getTime().getTime())));
@@ -81,9 +77,7 @@ public class OrderController {
     @PostMapping("/addDishToOrder")
     public String makeOrderAddDish(@ModelAttribute Dish dishForm, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.getName().equals("anonymousUser")) {
-            model.addAttribute("isUserAutorize", true);
-        }
+        GreetingController.checkAdmin(model);
         System.out.println(dishForm);
 
         User user = userService.findUserByUsername(auth.getName()).get();

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Proglot Monet | Menu</title>
+    <title>Proglot Monet | Add dish to menu</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
     <style type="text/css">
         /* DEMO ONLY */
-        .dish{margin: 10px}
-        .container .demo{text-align:center;}
+        .dish{margin: 10px; }
+        .container .demo{text-align:left;}
         .container .demo div{padding:15px 0;}
-        .container .demo div:nth-child(odd){color:#FFFFFF; background:#CDC1A8;}
-        .container .demo div:nth-child(even){color:#FFFFFF; background:#BBAA86;}
+        .container .demo div{color:#FFFFFF; background:#CDC1A8;}
         @media screen and (max-width:900px){.container .demo div{margin-bottom:0;}}
         /* DEMO ONLY */
     </style>
@@ -30,18 +29,11 @@
                 <ul class="clear">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/menu">Menu</a></li>
-                    {{^isUserAutorize}}
-                        <li><a href="/login">Sign in</a></li>
-                    {{/isUserAutorize}}
-                    {{#isUserAutorize}}
-                        <li><a href="/makeOrder">Make order</a></li>
-                        <li><a href="/showOrders">Orders</a></li>
-                        {{#isAdmin}}
-                            <li><a href="/admin/editMenu">Edit menu</a></li>
-                            <li><a href="/admin/editStaff">Edit staff</a></li>
-                        {{/isAdmin}}
-                        <li><a href="/logout">Sign Out</a></li>
-                    {{/isUserAutorize}}
+                    <li><a href="/makeOrder">Make order</a></li>
+                    <li><a href="/showOrders">Orders</a></li>
+                    <li><a href="/admin/editMenu">Edit menu</a></li>
+                    <li><a href="/admin/editStaff">Edit staff</a></li>
+                    <li><a href="/logout">Sign Out</a></li>
                 </ul>
             </nav>
             <!-- ################################################################################################ -->
@@ -53,16 +45,19 @@
 <div class="wrapper row3">
     <main class="hoc container clear">
         <div class="content">
-            <h2>Menu</h2>
+            <h2>Add a new dish to menu</h2>
             <div class="group btmspace-50 demo">
-                {{#dishes}}
-                    <div class="dish">
-                        <h2>{{dishName}}</h2>
-                        <p>Category: {{category}}</p>
-                        <p>{{price}} rub</p>
-                        <img src="/images/demo/gallery/dish.jpg">
-                    </div>
-                {{/dishes}}
+                <div class="dish" style="padding-left: 20px">
+                    {{#dish}}
+                    <form name="dishForm" action="/admin/addDishToMenu" method="post">
+                        <label>Dish name: <input type="text" name="dishName" value = "{{dishName}}" style="color:black;"></label>
+                        <label>Category: <input type="text" name="category" value = "{{category}}" style="color:black"></label>
+                        <label>Price: <input type="number" name="price" value = "{{price}}" style="color:black"></label>
+                        <label>In menu: <input type="checkbox" name="inMenu" {{checked}} ></label>
+                        <div><input class="btn" type="submit" value="Add this dish"/></div>
+                    </form>
+                    {{/dish}}
+                </div>
             </div>
         </div>
         <div class="clear"></div>

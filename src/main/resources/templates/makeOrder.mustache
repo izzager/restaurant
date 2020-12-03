@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>Proglot Monet | Menu</title>
+    <title>Proglot Monet | Make order</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" media="all">
@@ -29,18 +29,13 @@
                 <ul class="clear">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/menu">Menu</a></li>
-                    {{^isUserAutorize}}
-                        <li><a href="/login">Sign in</a></li>
-                    {{/isUserAutorize}}
-                    {{#isUserAutorize}}
-                        <li><a href="/makeOrder">Make order</a></li>
-                        <li><a href="/showOrders">Orders</a></li>
-                        {{#isAdmin}}
-                            <li><a href="/editMenu">Edit menu</a></li>
-                            <li><a href="/editStaff">Edit staff</a></li>
-                        {{/isAdmin}}
-                        <li><a href="/logout">Sign Out</a></li>
-                    {{/isUserAutorize}}
+                    <li><a href="/makeOrder">Make order</a></li>
+                    <li><a href="/showOrders">Orders</a></li>
+                    {{#isAdmin}}
+                        <li><a href="/admin/editMenu">Edit menu</a></li>
+                        <li><a href="/admin/editStaff">Edit staff</a></li>
+                    {{/isAdmin}}
+                    <li><a href="/logout">Sign Out</a></li>
                 </ul>
             </nav>
             <!-- ################################################################################################ -->

@@ -10,4 +10,8 @@ public interface DishRepository extends CrudRepository<Dish, Integer> {
     List<Dish> findAll();
     Optional<Dish> findById(int id);
     Optional<Dish> findFirstByDishName(String dishName);
+
+    @Override
+    <S extends Dish> S save(S s);
+
 }

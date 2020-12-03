@@ -42,9 +42,9 @@
 <div class="wrapper row3">
     <main class="hoc container clear">
         <div class="content">
-            <div>{{error}}</div>
+            <div>{{#error}}The user with this name already exists{{/error}}</div>
             <form name="userForm" action="registration" method="post">
-                <div><label> Username : <input type="text" name="username"/> </label></div>
+                <div><label> Username: <input type="text" name="username"/> </label></div>
                 <div><label> Password: <input type="password" name="password"/> </label></div>
                 <div><input type="submit" value="Register"/></div>
             </form>
